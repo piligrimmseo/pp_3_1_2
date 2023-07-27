@@ -1,19 +1,14 @@
 package com.example.pre_project.controller;
 
-import com.example.pre_project.Model.User;
+import com.example.pre_project.model.User;
 import com.example.pre_project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-
-
 @Controller
-
 public class UsersController {
-
-
     private final UserService userService;
 
     @Autowired
@@ -45,7 +40,6 @@ public class UsersController {
         return "redirect:/";
     }
 
-
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) {
         model.addAttribute("user", userService.show(id));
@@ -63,6 +57,4 @@ public class UsersController {
         userService.delete(id);
         return "redirect:/";
     }
-
-
 }

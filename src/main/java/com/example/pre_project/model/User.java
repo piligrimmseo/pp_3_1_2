@@ -1,24 +1,21 @@
-package com.example.pre_project.Model;
+package com.example.pre_project.model;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "surname")
     private String surname;
-    @Column(name = "name")
+
     private String name;
-    @Column(name = "age")
+
     private int age;
 
     public User() {
-
     }
 
     public User(String surname, String name, int age) {

@@ -1,52 +1,52 @@
 package com.example.pre_project.service;
 
-import com.example.pre_project.Model.User;
-import com.example.pre_project.dao.UserDAO;
+import com.example.pre_project.model.User;
+import com.example.pre_project.userRepository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@Transactional(readOnly = true)
 public class UserServiceImp implements UserService {
 
-    private final UserDAO userDao;
+    private final UserRepository userRepository;
 
     @Autowired
-    public UserServiceImp(UserDAO userDao) {
-        this.userDao = userDao;
+    public UserServiceImp(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-
     @Override
-    @Transactional(readOnly = true)
     public List<User> index() {
-        return userDao.index();
+        return userRepository.findAll();
     }
 
     @Override
-    @Transactional(readOnly = true)
     public User show(int id) {
-        return userDao.show(id);
+        Optional<User> userById = userRepository.findById(id);
+        return userById.orElse(null);
     }
 
     @Override
     @Transactional
     public void save(User user) {
-        userDao.save(user);
+        userRepository.save(user);
     }
 
     @Override
     @Transactional
     public void update(int id, User updateUser) {
-        userDao.update(id, updateUser);
+        updateUser.setId(id);
+        userRepository.save(updateUser);
     }
 
     @Override
     @Transactional
     public void delete(int id) {
-        userDao.delete(id);
+        userRepository.deleteById(id);
     }
 }

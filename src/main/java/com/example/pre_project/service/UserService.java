@@ -2,7 +2,7 @@ package com.example.pre_project.service;
 
 
 
-import com.example.pre_project.Model.User;
+import com.example.pre_project.model.User;
 
 import java.util.List;
 
